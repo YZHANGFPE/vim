@@ -10,6 +10,7 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
 
 call vundle#end()
 
