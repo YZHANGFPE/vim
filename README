@@ -1,7 +1,21 @@
-#My vim/tmux configuration
+# My vim/tmux configuration
 
 ln -s ~/.vim/vimrc ~/.vimrc
 ln -s ~/.vim/tmux.conf ~/.tmux.conf
+
+## Vundle operations on Plugins
+
+### Install plugins
+Modify vimrc
+open vim
+type :PluginInstall
+
+### Uninstall plugins
+Delete plugin in vimrc
+open vim
+type :PluginClean
+
+## Outdated setup for visualizatoin
 
 Install powerline font in order to use the powerline symbols in the airline theme
 
