@@ -20,7 +20,7 @@ open vim
 
 type :PluginClean
 
-## Outdated setup for visualizatoin
+## Outdated setup for visualization
 
 Install powerline font in order to use the powerline symbols in the airline theme
 
