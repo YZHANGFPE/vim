@@ -1,0 +1,48 @@
+syntax on
+filetype off
+inoremap jj <ESC>
+let mapleader = ","
+set encoding=utf-8
+set nocompatible
+set number
+
+" set incremental search match
+set incsearch
+" Show the status bar without split
+set laststatus=2
+" Always show the tab
+set showtabline=2
+
+"" Set color to 256
+"set t_Co=256
+"" Reduce the time delay when pressing esc
+"set timeoutlen=1000 ttimeoutlen=10
+"" Use solarized color scheme
+"set background=dark
+"let g:solarized_termcolors=16
+"" let g:solarized_termtrans=1
+"let g:solarized_visibility = "high"
+"let g:solarized_contrast = "high"
+"colorscheme solarized
+"" Set airline theme
+"let g:airline_theme="light"
+"let g:airline_powerline_fonts = 1
+
+"Plugins and vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'https://github.com/scrooloose/nerdtree.git'
+Plugin 'scrooloose/syntastic'
+Plugin 'kien/ctrlp.vim'
+Plugin 'ervandew/supertab'
+Plugin 'vim-scripts/taglist.vim'
+
+call vundle#end()
+
+filetype plugin indent on
+
+" Run currnet python script when pressed F9
+nnoremap <buffer> <F9> :exec '!clear & python' shellescape(@%, 1)<cr>
