@@ -22,6 +22,10 @@ type :PluginClean
 
 ## Outdated setup for visualization
 
+Setup solarized theme for gnome
+
+git clone https://github.com/Anthony25/gnome-terminal-colors-solarized
+
 Install powerline font in order to use the powerline symbols in the airline theme
 
 git clone https://github.com/powerline/fonts.git

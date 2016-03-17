@@ -45,11 +45,15 @@ let g:mapleader = ","
 " Map jj to <ESC>
 inoremap jj <ESC>
 
+" Reduce the time delay when pressing esc
+set timeoutlen=1000 ttimeoutlen=10
+
 " Fast saving
 nmap <leader>w :w!<cr>
 
 " Compile & Debug
-nmap <F8> :w<CR>:call CompileRun()<CR> 
+nmap <C-B> :w<CR>:call CompileRun()<CR>
+
 nmap <F8><F8> :w<CR>:call Debug()<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -144,12 +148,14 @@ syntax enable
 
 set background=dark
 
+colorscheme solarized
+
 " Set extra options when running in GUI mode
 if has("gui_running")
-    set guioptions-=T
-    set guioptions+=e
-    set t_Co=256
-    set guitablabel=%M\ %t
+"     set guioptions-=T
+"     set guioptions+=e
+"     set t_Co=256
+"     set guitablabel=%M\ %t
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -276,6 +282,9 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
+" Press Enter to add new line without entering the insert mode
+nmap <CR> o<ESC>
+
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
 nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
@@ -385,11 +394,23 @@ Plugin 'scrooloose/syntastic'
 Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
+Plugin 'altercation/vim-colors-solarized'
 
 call vundle#end()
 
 " Import the systags
 set tags+=~/.vim/systags
+
+" Use solarized color scheme
+" let g:solarized_termcolors=16
+" let g:solarized_termtrans=1
+" let g:solarized_visibility = "high"
+" let g:solarized_contrast = "high"
+" colorscheme solarized
+
+" Airline Theme Config
+" let g:airline_theme="light"
+" let g:airline_powerline_fonts = 1
 
 " NerdTree { 
 map <leader>t :NERDTree<cr>
@@ -404,11 +425,11 @@ let Tlist_File_Fold_Auto_Close=1
 " Only show current file taglist
 let Tlist_Show_One_File=1
 " Set ctags command
-let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
 " Set focus on Tlist
 let Tlist_GainFocus_On_ToggleOpen = 1
 " Set the key for Taglist
-noremap <leader>tl :Tlist<CR> 
+noremap <leader>tl :TlistToggle<CR> 
 " } 
 
 " SuperTab Config { 
@@ -476,48 +497,54 @@ function! <SID>BufcloseCloseIt()
 endfunction
 
 " Compile & Debug
-func CompileRun() 
-	exec "w"  
-	if &filetype == 'c'  
-		exec "!gcc % -g -o %<" 
-		exec "!.\/%<" 
-	elseif &filetype =='cpp' 
-		exec "!g++ % -g -o %<" 
-		exec "!.\/%<" 
-	elseif &filetype == 'python' || &filetype == 'py'
-		exec "!python %" 
-  elseif &filetype =='jade'
-    exec "!make"
-	endif 
-endfunc
+if !exists("*CompileRun")
+    func CompileRun() 
+    	exec "w"  
+    	if &filetype == 'c'  
+    		exec "!gcc % -g -o %<" 
+    		exec "!.\/%<" 
+    	elseif &filetype =='cpp' 
+    		exec "!g++ % -g -o %<" 
+    		exec "!.\/%<" 
+    	elseif &filetype == 'python' || &filetype == 'py'
+        exec '!clear;python %'
+      elseif &filetype =='jade'
+        exec "!make"
+    	endif 
+    endfunc
+endif
 
-func Debug() 
-	exec "w"  
-	if &filetype == 'c'  
-		exec "!rm %<" 
-		exec "!gcc % -g -o %<" 
-		exec "!gdb %<" 
-	elseif &filetype == 'cpp' 
-		exec "!rm %<" 
-		exec "!g++ % -g -o %<" 
-		exec "!gdb %<" 
-		exec "!rm %<.class" 
-	elseif &filetype == 'java' 
-		exec "!javac %" 
-		exec "!jdb %<" 
-	elseif &filetype == 'python' 
-		exec "!pdb %" 
-	endif 
-endfunc
+if !exists("*Debug")
+    func Debug() 
+    	exec "w"  
+    	if &filetype == 'c'  
+    		exec "!rm %<" 
+    		exec "!gcc % -g -o %<" 
+    		exec "!gdb %<" 
+    	elseif &filetype == 'cpp' 
+    		exec "!rm %<" 
+    		exec "!g++ % -g -o %<" 
+    		exec "!gdb %<" 
+    		exec "!rm %<.class" 
+    	elseif &filetype == 'java' 
+    		exec "!javac %" 
+    		exec "!jdb %<" 
+    	elseif &filetype == 'python' 
+    		exec "!pdb %" 
+    	endif 
+    endfunc
+endif
 
 " Close Parentheses
-function ClosePair(char) 
-	if getline('.')[col('.') - 1] == a:char 
-		return "\<Right>" 
-	else 
-		return a:char 
-	endif 
-endf
+if !exists("*ClosePair")
+    function ClosePair(char) 
+    	if getline('.')[col('.') - 1] == a:char 
+    		return "\<Right>" 
+    	else 
+    		return a:char 
+    	endif 
+    endf
+endif
 
 
 
