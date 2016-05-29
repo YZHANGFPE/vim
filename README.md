@@ -6,6 +6,10 @@ ln -s ~/.vim/tmux.conf ~/.tmux.conf
 
 ## Vundle operations on Plugins
 
+### Setup Vundle
+
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
 ### Install plugins
 Modify vimrc
 
