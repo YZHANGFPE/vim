@@ -56,7 +56,7 @@ nmap <C-B> :w<CR>:call CompileRun()<CR>
 
 nmap <F8><F8> :w<CR>:call Debug()<CR>
 
-nmap <F10> :make run<CR>
+nmap <F10> :w<CR>:make run<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Project Related
@@ -508,9 +508,7 @@ if !exists("*CompileRun")
     		exec "!gcc % -g -o %<" 
     		exec "!.\/%<" 
     	elseif &filetype =='cpp' 
-        exec "!clear"
-    		exec "<!g++ % -g -o %<" 
-    		exec "!.\/%<" 
+    		exec "!clear;g++ % -g -o %<;.\/%<" 
     	elseif &filetype == 'python' || &filetype == 'py'
         exec '!clear;python %'
       elseif &filetype =='jade'
