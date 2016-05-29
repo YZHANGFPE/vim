@@ -56,6 +56,8 @@ nmap <C-B> :w<CR>:call CompileRun()<CR>
 
 nmap <F8><F8> :w<CR>:call Debug()<CR>
 
+nmap <F10> :make run<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Project Related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -138,6 +140,7 @@ set tm=500
 ":inoremap > <c-r>=ClosePair('>')<CR> 
 
 " Fold Method
+set nofoldenable    " disable folding
 set foldmethod=syntax
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -400,6 +403,7 @@ call vundle#end()
 
 " Import the systags
 set tags+=~/.vim/systags
+set tags+=tags;/
 
 " Use solarized color scheme
 " let g:solarized_termcolors=16
@@ -504,7 +508,8 @@ if !exists("*CompileRun")
     		exec "!gcc % -g -o %<" 
     		exec "!.\/%<" 
     	elseif &filetype =='cpp' 
-    		exec "!g++ % -g -o %<" 
+        exec "!clear"
+    		exec "<!g++ % -g -o %<" 
     		exec "!.\/%<" 
     	elseif &filetype == 'python' || &filetype == 'py'
         exec '!clear;python %'
