@@ -440,6 +440,11 @@ noremap <leader>tl :TlistToggle<CR>
 let g:SuperTabDefaultCompletionType="<C-N>"
 " }
 
+" Syntasic Config {
+let g:syntastic_cpp_compiler = 'g++'
+let g:syntastic_cpp_compiler_options = '-std=c++11'
+" }
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -508,7 +513,7 @@ if !exists("*CompileRun")
     		exec "!gcc % -g -o %<" 
     		exec "!.\/%<" 
     	elseif &filetype =='cpp' 
-    		exec "!clear;g++ % -g -o %<;.\/%<" 
+    		exec "!clear;g++ % -std=c++11 -g -o %<;.\/%<" 
     	elseif &filetype == 'python' || &filetype == 'py'
         exec '!clear;python %'
       elseif &filetype =='jade'
