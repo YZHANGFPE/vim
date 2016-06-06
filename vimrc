@@ -398,6 +398,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Raimondi/delimitMate'
 
 call vundle#end()
 
@@ -444,7 +445,10 @@ let g:SuperTabDefaultCompletionType="<C-N>"
 let g:syntastic_cpp_compiler = 'g++'
 let g:syntastic_cpp_compiler_options = '-std=c++11'
 " }
-"
+
+" delimitMate Config {
+let delimitMate_expand_cr = 1
+" }
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
